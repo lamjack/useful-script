@@ -6,7 +6,7 @@ import re
 import sys
 
 if "darwin" != sys.platform:
-    sys.stderr.write("本工具只能用於Mac OS!\n");
+    sys.stderr.write("本工具只能用於Mac OS!\n")
     sys.exit(1)
 
 # Get process info

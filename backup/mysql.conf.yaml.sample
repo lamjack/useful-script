@@ -1,0 +1,14 @@
+# MYSQL
+MYSQL_HOST: 'localhost'
+MYSQL_PORT: 3306
+MYSQL_USER: ''
+MYSQL_PASSWORD: ''
+
+# TOOLS
+MYSQLDUMP_PATH: '/usr/local/bin/mysqldump'
+GZIP_PATH: '/usr/local/bin/gzip'
+
+# SETTINGS
+BACKUP_DBS: []
+BACKUP_PATH: '/home/backup/mysql'
+KEEP_DAY: 7

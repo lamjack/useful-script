@@ -4,23 +4,30 @@ import os
 import time
 import commands
 import sys
+import yaml
 
-MYSQL_DUMP_PATH = '/usr/local/bin/mysqldump'
-MYSQL_HOST      = 'localhost'
-MYSQL_ROOT_USER = ''
-MYSQL_ROOT_PASS = ''
-MYSQL_PORT      = 3306
+with open('mysql.conf.yaml', 'r') as stream:
+    try:
+        configs = yaml.load(stream)
+    except yaml.YAMLError as exc:
+        sys.exit()
 
-GZIP_PATH       = '/usr/local/bin/gzip'
+MYSQL_HOST      = configs['MYSQL_HOST']
+MYSQL_PORT      = configs['MYSQL_PORT']
+MYSQL_USER      = configs['MYSQL_USER']
+MYSQL_PASSWORD  = configs['MYSQL_PASSWORD']
 
-BACKUP_DBS      = []
-BACKUP_PATH     = ''
-KEEP_DAY        = 7
+MYSQLDUMP_PATH  = configs['MYSQLDUMP_PATH']
+GZIP_PATH       = configs['GZIP_PATH']
+
+BACKUP_DBS      = configs['BACKUP_DBS']
+BACKUP_PATH     = configs['BACKUP_PATH']
+KEEP_DAY        = configs['KEEP_DAY']
+
+DATETIME = time.strftime('%Y%m%d-%H%M%S')
 
 if not os.path.exists(BACKUP_PATH):
     os.makedirs(BACKUP_PATH)
-    
-DATETIME = time.strftime('%Y%m%d-%H%M%S')
     
 def main():
     run_command("find %s -name \"*.sql.gz\" -type f -mtime +%d -exec rm {} \;" % (BACKUP_PATH, KEEP_DAY))
@@ -36,7 +43,7 @@ def run_command(command):
     
 def do_mysql_backup(db):
     filename = BACKUP_PATH + '/' + db + '-' + DATETIME + '.sql.gz'
-    cmd = "%s -h %s -P %s -u %s -p%s %s | gzip > %s" % (MYSQL_DUMP_PATH, MYSQL_HOST,  MYSQL_PORT, MYSQL_ROOT_USER, MYSQL_ROOT_PASS, db, filename)
+    cmd = "%s -h %s -P %s -u %s -p%s %s | gzip > %s" % (MYSQLDUMP_PATH, MYSQL_HOST,  MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, db, filename)
     run_command(cmd)
         
 if __name__ == "__main__":

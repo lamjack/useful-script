@@ -7,14 +7,14 @@ import sys
 
 MYSQL_DUMP_PATH = '/usr/local/bin/mysqldump'
 MYSQL_HOST      = 'localhost'
-MYSQL_ROOT_USER = 'dev'
-MYSQL_ROOT_PASS = 'zx123456'
+MYSQL_ROOT_USER = ''
+MYSQL_ROOT_PASS = ''
 MYSQL_PORT      = 3306
 
 GZIP_PATH       = '/usr/local/bin/gzip'
 
-BACKUP_DBS      = ['dev_groupvbs', 'dev_isbn']
-BACKUP_PATH     = '/Users/jack/Backup/mysql'
+BACKUP_DBS      = []
+BACKUP_PATH     = ''
 KEEP_DAY        = 7
 
 if not os.path.exists(BACKUP_PATH):

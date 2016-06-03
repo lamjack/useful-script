@@ -6,7 +6,7 @@ import commands
 import sys
 import yaml
 
-CONF_PATH = os.path.dirname(os.path.abspath(__file__)) + '/mysql.conf.yaml';
+CONF_PATH = os.path.dirname(os.path.abspath(__file__)) + '/mysql.conf.yaml'
 with open(CONF_PATH, 'r') as stream:
     try:
         configs = yaml.load(stream)

@@ -6,7 +6,8 @@ import commands
 import sys
 import yaml
 
-with open('mysql.conf.yaml', 'r') as stream:
+CONF_PATH = os.path.dirname(os.path.abspath(__file__)).'/mysql.conf.yaml'
+with open(CONF_PATH, 'r') as stream:
     try:
         configs = yaml.load(stream)
     except yaml.YAMLError as exc:
